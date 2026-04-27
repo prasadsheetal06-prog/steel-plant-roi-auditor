@@ -22,6 +22,11 @@ st.markdown("""
 [data-testid="stMetricValue"] { font-size: 1.6rem !important; }
 [data-testid="stMetricLabel"] { font-size: 0.8rem; color: #aaa; }
 div[data-testid="stSidebar"]  { background-color: #161b22; }
+
+/* Hide Streamlit branding */
+#MainMenu { visibility: hidden; }
+footer { visibility: hidden; }
+header { visibility: hidden; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -58,9 +63,7 @@ with st.sidebar:
     else:
         st.caption("Must have columns: Parameters, UOM, Month, Metric_Value")
 
-    # ── Step 4: Sample template download ─────────────────────────────────────
-    # Place your Steel_Plant_Process_Master.xlsx in the same folder as app.py.
-    # This lets any new user download it, fill in their data, and upload it back.
+    # Sample template download
     st.divider()
     st.caption("New user? Download the sample template:")
     template_path = "Steel_Plant_Process_Master.xlsx"
@@ -89,8 +92,8 @@ if not uploaded_file or tonnage <= 0:
 
     st.markdown("""
     ### How to get started
-    1. **Choose file type** in the sidebar — *Raw Plant Excel* for your master file,
-       *Pre-transformed* if you already ran `transform.py`
+    1. **Choose file type** in the sidebar — *Raw Plant Excel* for your master
+       file, *Pre-transformed* if you already ran `transform.py`
     2. **Upload your `.xlsx` file**
     3. Set your **annual production** and **exchange rate**
     4. The audit runs automatically — no coding needed
@@ -281,4 +284,3 @@ if st.session_state.chat_history:
     if col_clear.button("🗑️ Clear chat"):
         ai.clear_chat()
         st.rerun()
-        
